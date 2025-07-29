@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio Rafa Souza</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:#121212; color:#eee; line-height:1.6; overflow-x:hidden;
+    }
+    a {color:inherit; text-decoration:none;}
+    header {
+      position:relative; height:70vh; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden; background:#000;
+    }
+    header video {
+      position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; filter:brightness(0.4);
+    }
+    header h1, header p {
+      color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.9);
+      opacity:0; animation:fadeIn 2s forwards;
+    }
+    header h1 {font-size:3.5rem; animation-delay:0.5s;}
+    header p {
+      font-size:1.3rem; margin-top:0.5rem; animation-delay:1s;
+      font-weight:300; letter-spacing:1.1px;
+    }
+    @keyframes fadeIn {to{opacity:1;}}
+    nav {
+      background:#222; position:sticky; top:0; z-index:1000;
+      box-shadow:0 2px 8px rgba(0,0,0,0.8);
+    }
+    .nav-container {
+      max-width:1000px; margin:auto; padding:1rem 1.5rem;
+      display:flex; justify-content:center; align-items:center; gap:2rem;
+    }
+    .nav-links {
+      display:flex; gap:2rem;
+    }
+    .nav-links a {
+      color:#eee; font-weight:600; font-size:1.1rem; padding:0.3rem 0.6rem; border-radius:4px;
+      transition:background-color 0.3s ease;
+    }
+    .nav-links a:hover, .nav-links a:focus {
+      background:#555; outline:none;
+    }
+    .menu-toggle {
+      display:none; cursor:pointer; flex-direction:column; gap:5px;
+    }
+    .menu-toggle div {
+      width:28px; height:3.5px; background:#eee; border-radius:3px;
+      transition:all 0.3s ease;
+    }
+    @media (max-width:768px) {
+      .nav-links {
+        position:fixed; top:60px; left:0; width:100%; background:#222;
+        flex-direction:column; gap:0; display:none; border-top:1px solid #444;
+        box-shadow:0 4px 12px rgba(0,0,0,0.8);
+      }
+      .nav-links.active {display:flex;}
+      .nav-links a {
+        padding:1rem; border-bottom:1px solid #444; font-size:1.2rem;
+      }
+      .menu-toggle {display:flex;}
+    }
+    section {
+      padding:3rem 1rem 4rem; max-width:1000px; margin:auto;
+      opacity:0; transform:translateY(30px); animation:slideUp 1s forwards;
+    }
+    section:nth-of-type(1) {animation-delay:0.5s;}
+    section:nth-of-type(2) {animation-delay:1s;}
+    section:nth-of-type(3) {animation-delay:1.5s;}
+    section:nth-of-type(4) {animation-delay:2s;}
+    @keyframes slideUp {
+      to {opacity:1; transform:translateY(0);}
+    }
+    h2 {
+      margin-bottom:1.5rem; color:#fff; border-left:4px solid #9ea5a1;
+      padding-left:0.8rem; font-weight:700; letter-spacing:1.2px; text-transform:uppercase;
+    }
+    .inicio-galeria {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem;
+    }
+    .inicio-galeria img,
+    .tab-content img {
+      width:100%; border-radius:10px; object-fit:cover;
+      box-shadow:0 4px 15px rgba(100,100,100,0.5); cursor:pointer;
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .inicio-galeria img:hover,
+    .tab-content img:hover {
+      transform:scale(1.05);
+      box-shadow:0 8px 20px rgba(150,150,150,0.7);
+    }
+    .tabs {
+      display:flex; gap:15px; flex-wrap:wrap; margin-bottom:2rem;
+    }
+    .tabs button {
+      padding:10px 30px; border:none; background:#333; color:#eee;
+      cursor:pointer; border-radius:30px; font-weight:600; font-size:1rem;
+      box-shadow:0 2px 8px rgba(0,0,0,0.7);
+      transition:background-color 0.3s ease;
+    }
+    .tabs button.active {
+      background:#25d366; color:#121212;
+    }
+    .tab-content {
+      display:none; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1rem;
+    }
+    .tab-content.active {
+      display:grid;
+    }
+    #sobre p, #contato p {
+      max-width:700px; margin-bottom:1rem; color:#ccc; font-weight:300;
+      letter-spacing:0.6px; line-height:1.5;
+    }
+    #contato form {
+      max-width:400px; margin-top:1rem; display:flex; flex-direction:column; gap:1rem;
+    }
+    #contato input,
+    #contato textarea {
+      padding:0.8rem 1rem; border-radius:6px; border:none;
+      font-size:1rem; font-family:inherit; resize:vertical;
+      background:#222; color:#eee;
+      box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+      transition: box-shadow 0.3s ease;
+    }
+    #contato input:focus,
+    #contato textarea:focus {
+      outline:none; box-shadow: 0 0 8px #25d366;
+    }
+    #whatsapp-float {
+      position:fixed; bottom:30px; right:30px; background:#25d366;
+      width:60px; height:60px; border-radius:50%; box-shadow:0 5px 15px rgba(37,211,102,0.7);
+      display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:1100;
+      transition:background 0.3s ease;
+    }
+    #whatsapp-float:hover {
+      background:#1ebe59;
+    }
+    #whatsapp-float svg {
+      width:30px; height:30px; fill:white;
+    }
+    #imageModal {
+      position:fixed; top:0; left:0; width:100vw; height:100vh;
+      background:rgba(0,0,0,0.8); display:none;
+      align-items:center; justify-content:center; z-index:2000;
+    }
+    #imageModal img {
+      max-width:90%; max-height:90%;
+      border-radius:10px; box-shadow:0 0 30px rgba(255,255,255,0.2);
+      background:#000; outline:3px solid #fff; padding:10px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <video autoplay muted loop playsinline>
+    <source src="https://cdn.pixabay.com/vimeo/474453091/Pixel%20Cross%20Worship%20-%20Dark%20Background%20.mp4" type="video/mp4" />
+    Seu navegador não suporta vídeo.
+  </video>
+  <div>
+    <h1>Rafa Souza </h1>
+    <p>📸 Fotos | 🎬 Vídeos | 📲 Conteúdo Criativo</p>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-container" role="navigation" aria-label="Menu Principal">
+    <div class="menu-toggle" aria-controls="menu-links" aria-expanded="false" role="button" tabindex="0" aria-label="Alternar menu">
+      <div></div><div></div><div></div>
+    </div>
+    <div class="nav-links" id="menu-links">
+      <a href="#inicio" tabindex="0">Início</a>
+      <a href="#sobre" tabindex="0">Sobre</a>
+      <a href="#galeria" tabindex="0">Galeria</a>
+      <a href="#contato" tabindex="0">Contato</a>
+    </div>
+  </div>
+</nav>
+<section id="sobre">
+    <h2>Sobre</h2>
+    <p>🎥 Transformamos ideias em histórias visuais ✨ Inovação e qualidade em cada projeto 📩 Vamos criar juntos?</p>
+  </section>
+<main>
+  <section id="inicio" tabindex="-1">
+    <div class="inicio-galeria" aria-label="Galeria inicial de imagens">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80" alt="Foto profissional 1" />
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=500&q=80" alt="Foto profissional 2" />
+      <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=500&q=80" alt="Foto profissional 3" />
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80" alt="Foto profissional 4" />
+    </div>
+  </section>
+
+  
+
+  <section id="galeria">
+    <h2>Galeria</h2>
+    <div class="tabs">
+      <button class="active" aria-controls="Casamento">Casamento</button>
+      <button aria-controls="Estudio">Estudio</button>
+      <button aria-controls="Eventos">Eventos</button>
+    </div>
+    <div id="Casamento" class="tab-content active">
+      <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=400&q=80" alt="Natureza 1" />
+      <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=400&q=80" alt="Natureza 2" />
+      <img src="https://images.unsplash.com/photo-1465101162946-4377e57745c3?auto=format&fit=crop&w=400&q=80" alt="Natureza 3" />
+    </div>
+    <div id="Estudio" class="tab-content">
+      <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=400&q=80" alt="Urbano 1" />
+      <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80" alt="Urbano 2" />
+      <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=400&q=80" alt="Urbano 3" />
+    </div>
+    <div id="Evento" class="tab-content">
+      <img src="https://images.unsplash.com/photo-1519677100203-a0e668c92439?auto=format&fit=crop&w=400&q=80" alt="Evento 1" />
+      <img src="https://images.unsplash.com/photo-1520975910660-27e3be3453a1?auto=format&fit=crop&w=400&q=80" alt="Evento 2" />
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="Evento 3" />
+    </div>
+  </section>
+
+  <section id="contato">
+  <h2>Contato</h2>
+  <p>Para orçamentos e informações, entre em contato conosco através do formulário abaixo ou pelo WhatsApp.</p>
+  <form>
+    <div style="position:relative;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#888" viewBox="0 0 24 24" style="position:absolute; top:50%; left:12px; transform:translateY(-50%); pointer-events:none;">
+        <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+      </svg>
+      <input type="text" placeholder="Seu nome" required style="padding-left:40px;" />
+    </div>
+    <div style="position:relative;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#888" viewBox="0 0 24 24" style="position:absolute; top:50%; left:12px; transform:translateY(-50%); pointer-events:none;">
+        <path d="M12 12.713l11.985-7.713v-1l-23.97 0v1z"/><path d="M12 13.987l-11.985-7.713v11.726c0 .53.45 1 1 1h21.97c.55 0 1-.47 1-1v-11.726z"/>
+      </svg>
+      <input type="email" placeholder="Seu e-mail" required style="padding-left:40px;" />
+    </div>
+    <div style="position:relative;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#888" viewBox="0 0 24 24" style="position:absolute; top:12px; left:12px; pointer-events:none;">
+        <path d="M20 2H4C2.9 2 2 2.9 2 4v16l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+      </svg>
+      <textarea rows="5" placeholder="Sua mensagem" required style="padding-left:40px; padding-top:1.2rem;"></textarea>
+    </div>
+    <button type="submit" style="
+      padding: 0.9rem 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #121212;
+      background-color: #25d366;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    ">Enviar</button>
+  </form>
+</section>
+</main>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/5511999999999" target="_blank" rel="noopener" id="whatsapp-float" aria-label="WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="white">
+    <path d="M16.003 2.59c-7.368 0-13.338 5.97-13.338 13.338 0 2.355.62 4.66 1.797 6.697L2 30l7.602-2.036a13.267 13.267 0 006.401 1.628c7.368 0 13.338-5.97 13.338-13.338S23.371 2.59 16.003 2.59zm0 24.289a11.027 11.027 0 01-5.593-1.548l-.4-.24-4.51 1.208 1.208-4.388-.26-.42a11.12 11.12 0 0118.857-11.04 11.12 11.12 0 01-9.302 17.428zm6.343-8.364c-.34-.17-2.017-1.01-2.33-1.127-.312-.115-.538-.17-.764.17-.226.34-.88 1.126-1.08 1.356-.198.226-.396.255-.736.085-.34-.17-1.44-.53-2.74-1.69-1.015-.91-1.7-2.034-1.9-2.374-.198-.34-.022-.523.15-.69.155-.152.34-.396.51-.595.17-.2.226-.34.34-.57.113-.226.056-.426-.028-.596-.085-.17-.764-1.842-1.05-2.522-.276-.66-.558-.57-.764-.58h-.65c-.226 0-.595.085-.907.425s-1.19 1.2-1.19 2.93 1.217 3.395 1.387 3.63c.17.226 2.41 3.82 5.847 5.36.817.354 1.453.566 1.95.725.82.28 1.57.24 2.165.146.66-.1 2.018-.825 2.304-1.622.283-.8.283-1.47.198-1.61-.085-.14-.31-.226-.65-.396z"/>
+  </svg>
+</a>
+
+<!-- Modal de imagem -->
+<div id="imageModal" onclick="closeModal()">
+  <img src="" alt="Imagem ampliada" />
+</div>
+
+<script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!expanded));
+    navLinks.classList.toggle('active');
+  });
+
+  const tabs = document.querySelectorAll('.tabs button');
+  const panels = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
+    });
+  });
+
+  // Modal de imagem
+  const images = document.querySelectorAll('.inicio-galeria img, .tab-content img');
+  const modal = document.getElementById('imageModal');
+  const modalImg = modal.querySelector('img');
+
+  images.forEach(img => {
+    img.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      modalImg.src = img.src;
+      modalImg.alt = img.alt;
+    });
+  });
+
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+
+  document.querySelector('#contato form').addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Mensagem enviada com sucesso!');
+    e.target.reset();
+  });
+</script>
+
+</body>
+</html>
